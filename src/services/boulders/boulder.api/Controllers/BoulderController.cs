@@ -7,10 +7,13 @@ namespace boulder.api.Controllers;
 public class BoulderController : ControllerBase
 {
     private readonly ILogger<BoulderController> _logger;
+    private readonly BoulderService _boulderService;
 
-    public BoulderController(ILogger<BoulderController> logger)
+    public BoulderController(ILogger<BoulderController> logger,
+                             BoulderService boulderService)
     {
         _logger = logger;
+        _boulderService = boulderService;
     }
 
     [HttpGet(Name = "GetBoulders")]
