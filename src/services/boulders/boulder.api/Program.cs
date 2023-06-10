@@ -5,20 +5,32 @@ using HealthChecks.UI.Client;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+IConfiguration configuration = new ConfigurationBuilder()
+                            .AddJsonFile("appsettings.json")
+                            .AddEnvironmentVariables()
+                            .Build();
+
+// Add services to the container.
 builder.Services.AddHealthChecks()
 .AddCheck<SampleHealthCheck>(
         "Sample",
         failureStatus: HealthStatus.Degraded);
 
+// Connect to PostgreSQL Database
+var connectionString = builder.Configuration["PostgresSettings:ConnectionString"];
+
+
 // Registers required services for health checks
 builder.Services.AddHealthChecksUI(setupSettings: setup =>
 {
+    //setup.DisableDatabaseMigrations();
     setup.SetEvaluationTimeInSeconds(15); // Configures the UI to poll for healthchecks updates every 5 seconds
 }
-).AddInMemoryStorage();
+).AddPostgreSqlStorage(connectionString);
+//.AddInMemoryStorage();
 
 //DI Layer
-builder.Services.AddApplication();
+builder.Services.AddApplication(configuration);
 
 builder.Services.AddControllers();
 
@@ -27,11 +39,11 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-app.MapHealthChecks("/health", new HealthCheckOptions()
-{
-    Predicate = _ => true,
-    ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
-});
+// app.MapHealthChecks("/health", new HealthCheckOptions()
+// {
+//     Predicate = _ => true,
+//     ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+// });
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -50,7 +62,7 @@ if (app.Environment.IsDevelopment())
 // }
 
 // build the app, register other middleware
-app.UseHealthChecksUI(config => config.UIPath = "/hc-ui");
+// app.UseHealthChecksUI(config => config.UIPath = "/hc-ui");
 
 app.MapControllers();
 

@@ -6,15 +6,15 @@ namespace boulder.api.Controllers;
 [Route("[controller]")]
 public class BoulderController : ControllerBase
 {
-    private readonly ILogger<BoulderController> _logger;
-    private readonly BoulderService _boulderService;
+    // private readonly ILogger<BoulderController> _logger;
+    // private readonly BoulderService _boulderService;
 
-    public BoulderController(ILogger<BoulderController> logger,
-                             BoulderService boulderService)
-    {
-        _logger = logger;
-        _boulderService = boulderService;
-    }
+    // public BoulderController(ILogger<BoulderController> logger,
+    //                          BoulderService boulderService)
+    // {
+    //     _logger = logger;
+    //     _boulderService = boulderService;
+    // }
 
     [HttpGet(Name = "GetBoulders")]
     public IEnumerable<Boulder> Get()

@@ -1,4 +1,3 @@
-
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 
 public class SampleHealthCheck : IHealthCheck
