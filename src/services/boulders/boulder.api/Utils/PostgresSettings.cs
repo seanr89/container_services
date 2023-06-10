@@ -1,5 +1,5 @@
 
-public record PostgreSettings
+public record PostgresSettings
 {
     public string ConnectionString { get; set; }
     public bool Migrate { get; set; }

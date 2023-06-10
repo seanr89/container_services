@@ -17,8 +17,11 @@ builder.Services.AddHealthChecksUI(setupSettings: setup =>
 }
 ).AddInMemoryStorage();
 
+//DI Layer
+builder.Services.AddApplication();
+
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -37,18 +40,14 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
-
-// app.UseAuthorization();
-
-      // {
-      //   "Name": "Ordering HTTP Check",
-      //   "Uri": "http://host.docker.internal:5102/hc"
-      // },
-      // {
-      //   "Name": "Ordering HTTP Background Check",
-      //   "Uri": "http://host.docker.internal:5111/hc"
-      // }
+// {
+//   "Name": "Ordering HTTP Check",
+//   "Uri": "http://host.docker.internal:5102/hc"
+// },
+// {
+//   "Name": "Ordering HTTP Background Check",
+//   "Uri": "http://host.docker.internal:5111/hc"
+// }
 
 // build the app, register other middleware
 app.UseHealthChecksUI(config => config.UIPath = "/hc-ui");
