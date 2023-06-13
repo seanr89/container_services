@@ -30,12 +30,32 @@ services:
             - ASPNETCORE_ENVIRONMENT=Development
             - PostgreSQL__ConnectionString='server=localhost;port=5432;userid=postgres_user;database=bouldersDb;Password=4y7sV96vA9wv46VR'
         ports:
-            - '8080:80'
+            - '5088:80'
         networks:
             - dockerapi-dev
     # WebHooks API
     webhooks:
+        image: webhooks:latest
+        container_name: webhooks
+        depends_on: [postgres_image]
+        environment:
+            - ASPNETCORE_ENVIRONMENT=Development
+            - PostgreSQL__ConnectionString='server=localhost;port=5432;userid=postgres_user;database=bouldersDb;Password=4y7sV96vA9wv46VR'
+        ports:
+            - '5202:80'
+        networks:
+            - dockerapi-dev
 
+    # Health Checker
+    healthchecks:
+        image: webhooks:latest
+        container_name: healthchecks
+        environment:
+            - ASPNETCORE_ENVIRONMENT=Development
+        ports:
+            - '5202:80'
+        networks:
+            - dockerapi-dev   
 
 volumes:
     postgres:
