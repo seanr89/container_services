@@ -14,7 +14,13 @@ services:
             POSTGRES_USER: 'postgres_user'
             POSTGES_DB: 'bouldersDb'
             PGDATA: /data/postgres
-        restart: always
+        #restart: always
+        healthcheck:
+            test: ["CMD-SHELL", "pg_isready", "-d", "db_prod"]
+            interval: 30s
+            timeout: 60s
+            retries: 5
+            start_period: 80s 
         volumes:
             - postgres:/data/postgres
         networks:
@@ -25,6 +31,7 @@ services:
     boulder-api:
         image: boulderapi:latest
         container_name: boulder
+        #platform: linux/amd64
         depends_on: [postgres_image]
         environment:
             - ASPNETCORE_ENVIRONMENT=Development
@@ -37,9 +44,10 @@ services:
     webhooks:
         image: webhooks:latest
         container_name: webhooks
+        #platform: linux/amd64
         depends_on: [postgres_image]
         environment:
-            - ASPNETCORE_ENVIRONMENT=Development
+            - ASPNETCORE_ENVIRONMENT=Release
             - PostgreSQL__ConnectionString='server=localhost;port=5432;userid=postgres_user;database=bouldersDb;Password=4y7sV96vA9wv46VR'
         ports:
             - '5202:80'
@@ -48,12 +56,13 @@ services:
 
     # Health Checker
     healthchecks:
-        image: webhooks:latest
+        image: healthchecker:latest
+        #platform: linux/amd64
         container_name: healthchecks
         environment:
-            - ASPNETCORE_ENVIRONMENT=Development
+            - ASPNETCORE_ENVIRONMENT=Release
         ports:
-            - '5202:80'
+            - '5005:80'
         networks:
             - dockerapi-dev   
 

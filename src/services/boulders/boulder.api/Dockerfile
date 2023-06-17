@@ -1,5 +1,7 @@
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build-env
 WORKDIR /app
+EXPOSE 80
+EXPOSE 443
 
 # Step 2: Copy project file to the ./ container folder
 COPY *.csproj ./
@@ -10,10 +12,10 @@ RUN dotnet restore
 COPY . .
 # Step 5: Build the app in Release mode
 # Step 6: Publish the application
-RUN dotnet publish -c Release -r linux-musl-x64 --self-contained true /p:PublishTrimmed=true -o out
+RUN dotnet publish -c Release -o out
 
 # Build runtime image
-FROM mcr.microsoft.com/dotnet/aspnet:7.0
+FROM mcr.microsoft.com/dotnet/aspnet:7.0-alpine3.18-arm64v8 as runtime
 WORKDIR /app
 COPY --from=build-env /app/out .
 ENTRYPOINT ["dotnet", "boulder.api.dll"]
