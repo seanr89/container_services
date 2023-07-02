@@ -17,8 +17,15 @@ public class BoulderController : ControllerBase
     }
 
     [HttpGet(Name = "GetBoulders")]
-    public IEnumerable<Boulder> Get()
+    public async Task<IEnumerable<Boulder>> Get()
     {
-        return _boulderService.GetAllBoulders();
+        return await _boulderService.GetAllBoulders();
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Post(Boulder boulder)
+    {
+        await _boulderService.AddBoulder(boulder);
+        return CreatedAtRoute("GetBoulders", new { id = boulder.Id }, boulder);
     }
 }

@@ -1,4 +1,6 @@
 
+using Microsoft.EntityFrameworkCore;
+
 public class BoulderService
 {
     internal readonly BoulderContext _context;
@@ -7,13 +9,23 @@ public class BoulderService
         _context = context;
     }
 
+    /// <summary>
+    /// Simple query to get the count of boulders
+    /// </summary>
+    /// <returns></returns>
     public int GetBoulderCount()
     {
-        throw new NotImplementedException();
+        return _context.Boulders.Count();
     }
 
-    public IEnumerable<Boulder> GetAllBoulders()
+    public async Task<IEnumerable<Boulder>> GetAllBoulders()
     {
-        throw new NotImplementedException();
+        return await _context.Boulders.ToListAsync();
+    }
+
+    public async Task<int> AddBoulder(Boulder boulder) {
+        await _context.Boulders.AddAsync(boulder);
+        var res = await _context.SaveChangesAsync();
+        return res;
     }
 }
