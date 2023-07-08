@@ -10,11 +10,14 @@ IConfiguration configuration = new ConfigurationBuilder()
                             .AddEnvironmentVariables()
                             .Build();
 
+string connectionString = builder.Configuration["PostgreSQL:ConnectionString"];
 // Add services to the container.
 builder.Services.AddHealthChecks()
 .AddCheck<SampleHealthCheck>(
         "Sample",
-        failureStatus: HealthStatus.Degraded);
+        failureStatus: HealthStatus.Degraded)
+.AddNpgSql(connectionString);
+
 
 //DI Layer
 builder.Services.AddApplication(configuration);

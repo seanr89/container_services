@@ -5,6 +5,7 @@ public class BoulderContext : DbContext
 {
     public DbSet<Boulder> Boulders { get; set; }
     public DbSet<Location> Locations { get; set; }
+    public DbSet<GradeType> GradeTypes { get; set; }
     public BoulderContext()
     {
     }
@@ -16,7 +17,6 @@ public class BoulderContext : DbContext
 
     // protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     // {
-
     // }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

@@ -22,6 +22,12 @@ public class BoulderController : ControllerBase
         return await _boulderService.GetAllBoulders();
     }
 
+    [HttpGet(Name = "GetBoulderCount")]
+    public int GetCount()
+    {
+        return _boulderService.GetBoulderCount();
+    }
+
     [HttpPost]
     public async Task<IActionResult> Post(Boulder boulder)
     {

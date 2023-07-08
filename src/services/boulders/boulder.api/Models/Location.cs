@@ -16,4 +16,9 @@ public class Location : AuditableEntity
         this.Active = active;
         this.Private = @private;
     }
+
+    public Location(string name, bool active, bool @private, string url) : this(name, active, @private)
+    {
+        this.Url = url;
+    }
 }
