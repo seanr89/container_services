@@ -9,6 +9,7 @@ public class Location : AuditableEntity
     public string? Url { get; set; }
     public bool Active { get; set; }
     public bool Private { get; set; }
+    public List<Grouping> BoulderGroups { get; set; }
 
     public Location(string name, bool active, bool @private)
     {

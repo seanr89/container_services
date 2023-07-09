@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace boulder.api.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("[controller]/[action]")]
 public class BoulderController : ControllerBase
 {
     private readonly ILogger<BoulderController> _logger;
