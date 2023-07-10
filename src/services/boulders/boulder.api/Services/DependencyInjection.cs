@@ -10,6 +10,7 @@ public static class DependencyInjection
             options.UseNpgsql(configuration.GetValue<string>("PostgresSettings:ConnectionString")));
 
         services.AddTransient<BoulderService>();
+        services.AddTransient<LocationService>();
         return services;
     }
 }

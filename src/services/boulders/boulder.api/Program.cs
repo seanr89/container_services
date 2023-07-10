@@ -18,7 +18,7 @@ builder.Services.AddHealthChecks()
         failureStatus: HealthStatus.Degraded)
 .AddCheck<DbHealthCheck>(
         "DB",
-        failureStatus: HealthStatus.Degraded)
+        failureStatus: HealthStatus.Degraded);
 // .AddNpgSql(connectionString);
 
 
