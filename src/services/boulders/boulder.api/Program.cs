@@ -10,6 +10,12 @@ IConfiguration configuration = new ConfigurationBuilder()
                             .AddEnvironmentVariables()
                             .Build();
 
+builder.Services.Configure<PostgresSettings>(
+                builder.Configuration.GetSection("PostgresSettings"));
+
+//DI Layer
+builder.Services.AddApplication(configuration);
+
 //string connectionString = builder.Configuration["PostgresSettings:ConnectionString"];
 // Add services to the container.
 builder.Services.AddHealthChecks()
@@ -20,10 +26,6 @@ builder.Services.AddHealthChecks()
         "DB",
         failureStatus: HealthStatus.Degraded);
 // .AddNpgSql(connectionString);
-
-
-//DI Layer
-builder.Services.AddApplication(configuration);
 
 builder.Services.AddControllers();
 

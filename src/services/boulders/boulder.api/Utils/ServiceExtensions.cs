@@ -9,10 +9,15 @@ public static class ServiceExtensions
     /// <param name="services"></param>
     public static void RunDBMigration(IServiceCollection services)
     {
+        Console.WriteLine("RunDBMigration");
         try{
             var provider = services.BuildServiceProvider();
             var context = provider.GetRequiredService<BoulderContext>();
             var opt = provider.GetRequiredService<IOptions<PostgresSettings>>().Value;
+
+            Console.WriteLine($"RunDBMigration - Migrate: {opt.Migrate}");
+            Console.WriteLine($"RunDBMigration - SeedData: {opt.SeedData}");
+            Console.WriteLine($"RunDBMigration - ConnectionString: {opt.ConnectionString}");
     
             if(opt.Migrate)
                 context.Database.Migrate();

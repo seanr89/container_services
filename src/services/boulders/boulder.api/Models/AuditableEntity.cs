@@ -16,9 +16,9 @@ public class AuditableEntity
     /// or app name etc...
     /// </summary>
     /// <value></value>
-    public string CreatedBy { get; set; }
+    public string CreatedBy { get; set; } = "Unknwon";
 
     public DateTime? LastModified { get; set; }
 
-    public string LastModifiedBy { get; set; }
+    public string LastModifiedBy { get; set; } = "Unknown";
 }

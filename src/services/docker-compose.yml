@@ -16,11 +16,12 @@ services:
             PGDATA: /data/postgres
         #restart: always
         healthcheck:
-            test: ["CMD-SHELL", "pg_isready", "-d", "db_prod"]
+            #test: ["CMD-SHELL", "pg_isready", "-d", "bouldersDb"]
+            test: ["CMD-SHELL", "pg_isready -U postgres"]
             interval: 30s
             timeout: 60s
             retries: 5
-            start_period: 80s 
+            #start_period: 80s 
         volumes:
             - postgres:/data/postgres
         networks:
@@ -32,39 +33,43 @@ services:
         image: boulderapi:latest
         container_name: boulder
         #platform: linux/amd64
-        depends_on: [postgres_image]
+        depends_on: 
+            postgres_image:
+                condition: service_healthy
+        links:
+            - postgres_image
         environment:
-            - ASPNETCORE_ENVIRONMENT=Development
-            - PostgreSQL__ConnectionString='server=localhost;port=5432;userid=postgres_user;database=bouldersDb;Password=4y7sV96vA9wv46VR'
+            - ASPNETCORE_ENVIRONMENT=Release
+            - PostgresSettings__ConnectionString=host=host.docker.internal;port=5432;userid=postgres_user;database=bouldersDb;Password=4y7sV96vA9wv46VR
         ports:
             - '5088:80'
         networks:
             - dockerapi-dev
     # WebHooks API
-    webhooks:
-        image: webhooks:latest
-        container_name: webhooks
-        #platform: linux/amd64
-        depends_on: [postgres_image]
-        environment:
-            - ASPNETCORE_ENVIRONMENT=Release
-            - PostgreSQL__ConnectionString='server=localhost;port=5432;userid=postgres_user;database=bouldersDb;Password=4y7sV96vA9wv46VR'
-        ports:
-            - '5202:80'
-        networks:
-            - dockerapi-dev
+    # webhooks:
+    #     image: webhooks:latest
+    #     container_name: webhooks
+    #     #platform: linux/amd64
+    #     depends_on: [postgres_image]
+    #     environment:
+    #         - ASPNETCORE_ENVIRONMENT=Release
+    #         - PostgreSQL__ConnectionString='server=localhost;port=5432;userid=postgres_user;database=bouldersDb;Password=4y7sV96vA9wv46VR'
+    #     ports:
+    #         - '5202:80'
+    #     networks:
+    #         - dockerapi-dev
 
     # Health Checker
-    healthchecks:
-        image: healthchecker:latest
-        #platform: linux/amd64
-        container_name: healthchecks
-        environment:
-            - ASPNETCORE_ENVIRONMENT=Release
-        ports:
-            - '5005:80'
-        networks:
-            - dockerapi-dev   
+    # healthchecks:
+    #     image: healthchecker:latest
+    #     #platform: linux/amd64
+    #     container_name: healthchecks
+    #     environment:
+    #         - ASPNETCORE_ENVIRONMENT=Release
+    #     ports:
+    #         - '5005:80'
+    #     networks:
+    #         - dockerapi-dev   
 
 volumes:
     postgres:

@@ -15,7 +15,7 @@ COPY . .
 RUN dotnet publish -c Release -o out
 
 # Build runtime image
-FROM mcr.microsoft.com/dotnet/aspnet:7.0-alpine3.18-arm64v8 as runtime
+FROM mcr.microsoft.com/dotnet/aspnet:7.0-alpine-arm64v8 as runtime
 WORKDIR /app
 COPY --from=build-env /app/out .
 ENTRYPOINT ["dotnet", "boulder.api.dll"]

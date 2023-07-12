@@ -7,21 +7,44 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace boulder.api.Migrations
 {
     /// <inheritdoc />
-    public partial class ClimbsAndSessions : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropColumn(
-                name: "ContactEmail",
-                table: "Boulders");
+            migrationBuilder.CreateTable(
+                name: "GradeTypes",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Name = table.Column<string>(type: "text", nullable: false),
+                    Active = table.Column<bool>(type: "boolean", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_GradeTypes", x => x.Id);
+                });
 
-            migrationBuilder.AddColumn<int>(
-                name: "BoulderGroupId",
-                table: "Boulders",
-                type: "integer",
-                nullable: false,
-                defaultValue: 0);
+            migrationBuilder.CreateTable(
+                name: "Locations",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Name = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false),
+                    Url = table.Column<string>(type: "text", nullable: true),
+                    Active = table.Column<bool>(type: "boolean", nullable: false, defaultValue: true),
+                    Private = table.Column<bool>(type: "boolean", nullable: false),
+                    Created = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    CreatedBy = table.Column<string>(type: "text", nullable: false),
+                    LastModified = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    LastModifiedBy = table.Column<string>(type: "text", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Locations", x => x.Id);
+                });
 
             migrationBuilder.CreateTable(
                 name: "Grouping",
@@ -60,6 +83,28 @@ namespace boulder.api.Migrations
                         name: "FK_Sessions_Locations_GymLocationId",
                         column: x => x.GymLocationId,
                         principalTable: "Locations",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Boulders",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    Name = table.Column<string>(type: "character varying(150)", maxLength: 150, nullable: false),
+                    Active = table.Column<bool>(type: "boolean", nullable: false, defaultValue: true),
+                    ActiveDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    DeActiveDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    BoulderGroupId = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Boulders", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Boulders_Grouping_BoulderGroupId",
+                        column: x => x.BoulderGroupId,
+                        principalTable: "Grouping",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -117,46 +162,28 @@ namespace boulder.api.Migrations
                 name: "IX_Sessions_GymLocationId",
                 table: "Sessions",
                 column: "GymLocationId");
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Boulders_Grouping_BoulderGroupId",
-                table: "Boulders",
-                column: "BoulderGroupId",
-                principalTable: "Grouping",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_Boulders_Grouping_BoulderGroupId",
-                table: "Boulders");
-
             migrationBuilder.DropTable(
                 name: "Climbs");
+
+            migrationBuilder.DropTable(
+                name: "GradeTypes");
+
+            migrationBuilder.DropTable(
+                name: "Boulders");
+
+            migrationBuilder.DropTable(
+                name: "Sessions");
 
             migrationBuilder.DropTable(
                 name: "Grouping");
 
             migrationBuilder.DropTable(
-                name: "Sessions");
-
-            migrationBuilder.DropIndex(
-                name: "IX_Boulders_BoulderGroupId",
-                table: "Boulders");
-
-            migrationBuilder.DropColumn(
-                name: "BoulderGroupId",
-                table: "Boulders");
-
-            migrationBuilder.AddColumn<string>(
-                name: "ContactEmail",
-                table: "Boulders",
-                type: "text",
-                nullable: false,
-                defaultValue: "");
+                name: "Locations");
         }
     }
 }
