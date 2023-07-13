@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -10,9 +11,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace boulder.api.Migrations
 {
     [DbContext(typeof(BoulderContext))]
-    partial class BoulderContextModelSnapshot : ModelSnapshot
+    [Migration("20230713164243_LocationPrivate")]
+    partial class LocationPrivate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -38,7 +41,7 @@ namespace boulder.api.Migrations
                     b.Property<int>("BoulderGroupId")
                         .HasColumnType("integer");
 
-                    b.Property<DateTime?>("DeActiveDate")
+                    b.Property<DateTime>("DeActiveDate")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Name")
@@ -127,7 +130,7 @@ namespace boulder.api.Migrations
 
                     b.HasIndex("GymLocationId");
 
-                    b.ToTable("Groupings");
+                    b.ToTable("Grouping");
                 });
 
             modelBuilder.Entity("Location", b =>

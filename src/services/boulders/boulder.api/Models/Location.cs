@@ -8,19 +8,19 @@ public class Location : AuditableEntity
     public string Name { get; set; }
     public string? Url { get; set; }
     public bool Active { get; set; }
-    public bool Private { get; set; }
+    public bool IsPrivate { get; set; }
     public List<Grouping> BoulderGroups { get; set; }
 
     #region Constructors
 
-    public Location(string name, bool active, bool @private)
+    public Location(string name, bool active, bool isPrivate)
     {
         this.Name = name;
         this.Active = active;
-        this.Private = @private;
+        this.IsPrivate = isPrivate;
     }
 
-    public Location(string name, bool active, bool @private, string url) : this(name, active, @private)
+    public Location(string name, bool active, bool isPrivate, string url) : this(name, active, isPrivate)
     {
         this.Url = url;
     }

@@ -9,10 +9,17 @@ internal class LocationConfig : IEntityTypeConfiguration<Location>
         #region Properties
 
         entity.HasKey(a => a.Id);
-        //entity.Property(p => p.Id).HasDefaultValueSql("NEWID()");
         entity.Property(p => p.Name).IsRequired().HasMaxLength(200);
         entity.Property(p => p.Active).IsRequired().HasDefaultValue(true);
+        entity.Property(p => p.IsPrivate).IsRequired().HasDefaultValue(false);
 
+        #endregion
+
+        #region Relationships
+        entity
+            .HasMany(c => c.BoulderGroups)
+            .WithOne(m => m.GymLocation)
+            .OnDelete(DeleteBehavior.Cascade);
         #endregion
     }
 }

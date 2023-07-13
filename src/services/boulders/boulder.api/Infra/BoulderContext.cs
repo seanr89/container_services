@@ -6,7 +6,7 @@ public class BoulderContext : DbContext
     public DbSet<Boulder> Boulders { get; set; }
     public DbSet<Location> Locations { get; set; }
     public DbSet<GradeType> GradeTypes { get; set; }
-    public DbSet<Grouping> Grouping { get; set; }
+    public DbSet<Grouping> Groupings { get; set; }
     public DbSet<Climb> Climbs { get; set; }
     public DbSet<Session> Sessions { get; set; }
     
