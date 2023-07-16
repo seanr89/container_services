@@ -4,12 +4,13 @@
 /// </summary>
 public static class DbSeeding
 {
+    /// <summary>
+    /// Seed the database with basic data
+    /// </summary>
+    /// <param name="context"></param>
+    /// <returns></returns>
     public static async Task TryRunSeed(BoulderContext context)
     {
-        if (!context.Boulders.Any())
-        {
-        }
-
         if(!context.Locations.Any())
         {
             await SeedLocations(context);
@@ -19,6 +20,11 @@ public static class DbSeeding
         {
             await SeedGroupings(context);
         }
+
+        if (!context.Boulders.Any())
+        {
+            await SeedBoulders(context);
+        } 
     }
 
     static async Task SeedBoulders(BoulderContext context)

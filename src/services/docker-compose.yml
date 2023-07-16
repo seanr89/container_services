@@ -60,16 +60,16 @@ services:
     #         - dockerapi-dev
 
     # Health Checker
-    # healthchecks:
-    #     image: healthchecker:latest
-    #     #platform: linux/amd64
-    #     container_name: healthchecks
-    #     environment:
-    #         - ASPNETCORE_ENVIRONMENT=Release
-    #     ports:
-    #         - '5005:80'
-    #     networks:
-    #         - dockerapi-dev   
+    healthchecks:
+        image: healthchecker:latest
+        #platform: linux/amd64
+        container_name: healthchecks
+        environment:
+            - ASPNETCORE_ENVIRONMENT=Release
+        ports:
+            - '5005:80'
+        networks:
+            - dockerapi-dev   
 
 volumes:
     postgres:

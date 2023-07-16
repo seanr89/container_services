@@ -15,6 +15,6 @@ docker build . -f Dockerfile -t 'webhooks:latest'
 cd ../../
 
 cd ../services/healthchecker.api/
-##docker build . -f Dockerfile -t 'healthchecker:latest'
+docker build . -f Dockerfile -t 'healthchecker:latest'
 
 echo "Dockerisation Complete!"
