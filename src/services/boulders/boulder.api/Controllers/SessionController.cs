@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 
 [ApiController]
-[Route("[controller]/[action]]")]
+[Route("[controller]/[action]")]
 public class SessionController: ControllerBase
 {
     private readonly SessionService _sessionService;

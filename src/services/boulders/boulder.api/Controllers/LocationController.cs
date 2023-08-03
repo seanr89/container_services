@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 
 [ApiController]
-[Route("[controller]/[action]]")]
+[Route("[controller]/[action]")]
 public class LocationController : ControllerBase
 {
     private readonly ILogger<LocationController> _logger;

@@ -1,6 +1,3 @@
-
-using Microsoft.EntityFrameworkCore;
-
 public class BoulderService
 {
     internal readonly BoulderContext _context;

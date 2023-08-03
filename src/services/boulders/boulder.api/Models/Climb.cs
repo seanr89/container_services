@@ -1,4 +1,7 @@
 
+/// <summary>
+/// Model for a single climb
+/// </summary>
 public class Climb
 {
     public int Id { get; private set; }

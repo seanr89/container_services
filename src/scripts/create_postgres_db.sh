@@ -7,7 +7,7 @@ echo "Executing DB script!"
 docker run --name postgresql \
     -e POSTGRES_USER=postgres_user \
     -e POSTGRES_PASSWORD=4y7sV96vA9wv46VR \
-    -e POSTGRES_DB=clubsDb \
+    -e POSTGRES_DB=bouldersDb \
     -p 5432:5432 \
     -d postgres
 
