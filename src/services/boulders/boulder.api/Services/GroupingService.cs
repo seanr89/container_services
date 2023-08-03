@@ -1,5 +1,3 @@
-using Microsoft.EntityFrameworkCore;
-
 public class GroupingService
 {
     private readonly BoulderContext _context;
@@ -14,7 +12,7 @@ public class GroupingService
         return await _context.Groupings.ToListAsync();
     }
 
-    public async Task<Grouping> GetGroupingById(Guid id)
+    public async Task<Grouping?> GetGroupingById(Guid id)
     {
         return await _context.Groupings.FindAsync(id);
     }

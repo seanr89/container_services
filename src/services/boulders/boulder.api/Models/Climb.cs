@@ -7,9 +7,4 @@ public class Climb
     public bool Complete { get; set; }
     public bool Project { get; set; }
     public Boulder Boulder { get; set; }
-
-    public Climb()
-    {
-        
-    }
 }

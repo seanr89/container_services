@@ -14,11 +14,15 @@ public record Boulder
     {
     }
 
-    public Boulder(string name, bool active, DateTime activeDate, Grouping boulderGroup)
+    public Boulder(string name, bool active, DateTime activeDate)
     {
         Name = name;
         Active = active;
         ActiveDate = activeDate;
+    }
+
+    public Boulder(string name, bool active, DateTime activeDate, Grouping boulderGroup) : this(name, active, activeDate)
+    {
         BoulderGroup = boulderGroup;
     }
 
