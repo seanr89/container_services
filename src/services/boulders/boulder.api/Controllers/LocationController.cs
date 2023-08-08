@@ -17,9 +17,16 @@ public class LocationController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IEnumerable<Location>> Get()
+    public async Task<IEnumerable<LocationListDTO>> Get()
     {
-        return await _locationService.GetAllLocations();
+        //return await _locationService.GetAllLocations();
+        var data = await _locationService.GetAllLocations();
+        if(data.Any())
+        {
+            var dtos = data.Select(x => new LocationListDTO(x));
+            return dtos;
+        }
+        return Enumerable.Empty<LocationListDTO>();
     }
 
     [HttpGet("{id}")]
@@ -31,16 +38,19 @@ public class LocationController : ControllerBase
         {
             return NotFound();
         }
+        var locationDTO = new LocationDTO(location);
 
-        return location;
+        return locationDTO;
     }
 
     [HttpPost]
-    public async Task<ActionResult<Location>> Create(Location location)
+    public async Task<ActionResult<Location>> Create(CreateLocationDTO location)
     {
-        await _locationService.CreateLocation(location);
+        var locationModel = location.ToLocation(location);
 
-        return CreatedAtAction(nameof(GetById), new { id = location.Id }, location);
+        await _locationService.CreateLocation(locationModel);
+
+        return CreatedAtAction(nameof(GetById), new { id = locationModel.Id }, locationModel);
     }
 
     [HttpPut("{id}")]
