@@ -5,4 +5,9 @@ public class ImageService
     {
         
     }
+
+    public void GetImageURLFromName(string name)
+    {
+        throw new NotImplementedException();
+    }
 }

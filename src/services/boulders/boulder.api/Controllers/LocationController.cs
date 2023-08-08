@@ -30,7 +30,7 @@ public class LocationController : ControllerBase
     }
 
     [HttpGet("{id}")]
-    public async Task<ActionResult<Location>> GetById(int id)
+    public async Task<ActionResult<LocationDTO>> GetById(int id)
     {
         var location = await _locationService.GetLocationById(id);
 
@@ -44,13 +44,15 @@ public class LocationController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<ActionResult<Location>> Create(CreateLocationDTO location)
+    public async Task<ActionResult<LocationDTO>> Create(CreateLocationDTO location)
     {
         var locationModel = location.ToLocation(location);
 
         await _locationService.CreateLocation(locationModel);
 
-        return CreatedAtAction(nameof(GetById), new { id = locationModel.Id }, locationModel);
+        var locationDTO = new LocationDTO(locationModel);
+
+        return CreatedAtAction(nameof(GetById), new { id = locationDTO.Id }, locationDTO);
     }
 
     [HttpPut("{id}")]
