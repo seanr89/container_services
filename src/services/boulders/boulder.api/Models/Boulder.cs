@@ -37,18 +37,21 @@ public record Boulder
 
     #region Public Methods
 
-    public void Activate () => this.Active = true;
+    public void Activate() => this.Active = true;
 
-    public void Deactivate () => this.Active = false;   
+    public void Deactivate() => this.Active = false;
 
-    public void SetGrouping (Grouping grouping) => this.BoulderGroup = grouping;
+    public void SetGrouping(Grouping grouping) => this.BoulderGroup = grouping;
 
-    public void SetActiveDate (DateTime activeDate) => this.ActiveDate = activeDate;
+    public void SetActiveDate(DateTime activeDate) => this.ActiveDate = activeDate;
 
-    public void SetDeActiveDate (DateTime deActiveDate){
-        if(deActiveDate < this.ActiveDate)
-            throw new Exception("DeActiveDate cannot be before ActiveDate");
-        this.DeActiveDate = deActiveDate;
+    public void SetDeActiveDate(DateTime deActiveDate)
+    {
+        if (deActiveDate >= this.ActiveDate)
+        {
+            this.DeActiveDate = deActiveDate;
+        }
+        throw new Exception("DeActiveDate cannot be before ActiveDate");
     }
 
     #endregion

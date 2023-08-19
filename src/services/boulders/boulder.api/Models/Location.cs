@@ -7,7 +7,7 @@ public class Location : AuditableEntity
     public int Id { get; private set; }
     public string Name { get; set; }
     public string? Url { get; set; }
-    public bool Active { get; set; }
+    public bool Active { get; private set; }
     public bool IsPrivate { get; set; }
     public List<Grouping> BoulderGroups { get; set; }
 
