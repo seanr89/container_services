@@ -11,6 +11,8 @@ public static class DependencyInjection
 
         services.AddTransient<BoulderService>();
         services.AddTransient<LocationService>();
+        services.AddTransient<SessionService>();
+        services.AddTransient<GroupingService>();
         return services;
     }
 }

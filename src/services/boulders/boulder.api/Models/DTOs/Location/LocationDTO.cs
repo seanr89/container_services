@@ -13,6 +13,6 @@ public class LocationDTO
         this.Name = model.Name;
         this.Active = model.Active;
         this.IsPrivate = model.IsPrivate;
-        this.Groupings = model.Groupings.Select(g => new GroupingListDTO(g)).ToList();
+        this.Groupings = model.BoulderGroups.Select(g => new GroupingListDTO(g)).ToList();
     }
 }

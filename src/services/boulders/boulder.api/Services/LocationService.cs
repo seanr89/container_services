@@ -11,15 +11,9 @@ public class LocationService
         _dbContext = dbContext;
     }
 
-    public async Task<IEnumerable<Location>> GetAllLocations()
-    {
-        return await _dbContext.Locations.ToListAsync();
-    }
+    public async Task<IEnumerable<Location>> GetAllLocations() => await _dbContext.Locations.ToListAsync();
 
-    public async Task<Location> GetLocationById(int id)
-    {
-        return await _dbContext.Locations.FindAsync(id);
-    }
+    public async Task<Location> GetLocationById(int id) => await _dbContext.Locations.FindAsync(id);
 
     public async Task CreateLocation(Location location)
     {

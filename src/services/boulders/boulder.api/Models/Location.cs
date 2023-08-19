@@ -20,23 +20,17 @@ public class Location : AuditableEntity
         this.IsPrivate = isPrivate;
     }
 
-    public Location(string name, bool active, bool isPrivate, string url) : this(name, active, isPrivate)
-    {
-        this.Url = url;
-    }
+    public Location(string name, bool active, bool isPrivate, string url) : this(name, active, isPrivate) => this.Url = url;
 
     #endregion
 
     #region Public Methods
 
-    public void AddBoulderGroup(Grouping boulderGroup)
-    {
-        this.BoulderGroups.Add(boulderGroup);
-    }
+    public void AddBoulderGroup(Grouping boulderGroup) => this.BoulderGroups.Add(boulderGroup);
 
-    public void Activate () => this.Active = true;
+    public void Activate() => this.Active = true;
 
-    public void Deactivate () => this.Active = false;   
+    public void Deactivate() => this.Active = false;
 
     #endregion
 }
