@@ -26,11 +26,15 @@ public class Location : AuditableEntity
 
     #region Public Methods
 
+    public void SetName(string name) => this.Name = name;
+
     public void AddBoulderGroup(Grouping boulderGroup) => this.BoulderGroups.Add(boulderGroup);
 
     public void Activate() => this.Active = true;
 
     public void Deactivate() => this.Active = false;
+
+    public void SetIsPrivate(bool isPrivate) => this.IsPrivate = isPrivate;
 
     #endregion
 }

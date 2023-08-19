@@ -39,5 +39,4 @@ app.MapGet("/", () => "Hello World!");
 
 #endregion
 
-
 app.Run();

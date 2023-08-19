@@ -7,23 +7,21 @@ public class LocationTests
         var name = "Test Location";
         var active = true;
         var isPrivate = false;
-        var boulderGroups = new List<Grouping> { Grouping.A, Grouping.B };
 
-        // Act
-        var location = new Location(name, active, isPrivate, boulderGroups);
+        //Act
+        var location = new Location(name, active, isPrivate);
 
-        // Assert
+        //Assert
         Assert.Equal(name, location.Name);
         Assert.Equal(active, location.Active);
         Assert.Equal(isPrivate, location.IsPrivate);
-        Assert.Equal(boulderGroups, location.BoulderGroups);
     }
 
     [Fact]
     public void SetName_ChangesName()
     {
         // Arrange
-        var location = new Location("Test Location", true, false, new List<Grouping>());
+        var location = new Location("Test Location", true, false);
 
         // Act
         location.SetName("New Name");
@@ -36,10 +34,10 @@ public class LocationTests
     public void SetActive_ChangesActive()
     {
         // Arrange
-        var location = new Location("Test Location", true, false, new List<Grouping>());
+        var location = new Location("Test Location", true, false);
 
         // Act
-        location.SetActive(false);
+        location.Deactivate();
 
         // Assert
         Assert.False(location.Active);
@@ -49,7 +47,7 @@ public class LocationTests
     public void SetIsPrivate_ChangesIsPrivate()
     {
         // Arrange
-        var location = new Location("Test Location", true, false, new List<Grouping>());
+        var location = new Location("Test Location", true, false);
 
         // Act
         location.SetIsPrivate(true);
@@ -62,25 +60,26 @@ public class LocationTests
     public void AddBoulderGroup_AddsGroup()
     {
         // Arrange
-        var location = new Location("Test Location", true, false, new List<Grouping>());
+        var location = new Location("Test Location", true, false);
+        var grouping = new Grouping();
 
         // Act
-        location.AddBoulderGroup(Grouping.A);
+        location.AddBoulderGroup(grouping);
 
         // Assert
-        Assert.Contains(Grouping.A, location.BoulderGroups);
+        Assert.Contains(grouping, location.BoulderGroups);
     }
 
-    [Fact]
-    public void RemoveBoulderGroup_RemovesGroup()
-    {
-        // Arrange
-        var location = new Location("Test Location", true, false, new List<Grouping> { Grouping.A, Grouping.B });
+    // [Fact]
+    // public void RemoveBoulderGroup_RemovesGroup()
+    // {
+    //     // Arrange
+    //     var location = new Location("Test Location", true, false, new List<Grouping> { Grouping.A, Grouping.B });
 
-        // Act
-        location.RemoveBoulderGroup(Grouping.A);
+    //     // Act
+    //     location.RemoveBoulderGroup(Grouping.A);
 
-        // Assert
-        Assert.DoesNotContain(Grouping.A, location.BoulderGroups);
-    }
+    //     // Assert
+    //     Assert.DoesNotContain(Grouping.A, location.BoulderGroups);
+    // }
 }

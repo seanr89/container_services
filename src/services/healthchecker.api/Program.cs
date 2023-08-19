@@ -30,7 +30,7 @@ app.UseHealthChecksUI(config => config.UIPath = "/hc-ui");
 #region Min-Endpoints
 
 // Basic Test Endpoint! (Hello)
-app.MapGet("/hello", () => "Hello World!");
+// app.MapGet("/hello", () => "Hello World!");
 
 #endregion
 
