@@ -3,14 +3,14 @@ name: catalog-api
 on:
  push:
     branches: [ "main" ]
-  pull_request:
+ pull_request:
     branches: [ "main" ]
 
 jobs:
   build:
       runs-on: ubuntu-latest
       defaults:
-          run:
+           run:
             working-directory: ./src/services/boulders/boulders.api/
 
       steps:
