@@ -1,6 +1,4 @@
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 [ApiController]
 [Route("[controller]/[action]")]
@@ -12,6 +10,8 @@ public class LocationController : ControllerBase
     public LocationController(ILogger<LocationController> logger,
                                 LocationService locationService)
     {
+        ArgumentNullException.ThrowIfNull(logger, "logger");
+        ArgumentNullException.ThrowIfNull(locationService, "locationService");
         _logger = logger;
         _locationService = locationService;
     }

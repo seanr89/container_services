@@ -1,4 +1,4 @@
-name: catalog-api
+name: boulder-api docker
 
 on:
  push:
