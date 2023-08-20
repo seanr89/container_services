@@ -11,7 +11,7 @@ jobs:
       runs-on: ubuntu-latest
       defaults:
            run:
-            working-directory: ./src/services/boulders/boulders.api/
+            working-directory: ./src/services/boulders/boulder.api/
 
       steps:
       - uses: actions/checkout@v3
