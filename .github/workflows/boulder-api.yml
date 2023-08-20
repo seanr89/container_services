@@ -7,15 +7,13 @@ on:
     branches: [ "main" ]
 
 jobs:
-
   build:
+      runs-on: ubuntu-latest
+      defaults:
+          run:
+            working-directory: ./src/services/boulders/boulders.api/
 
-    runs-on: ubuntu-latest
-    defaults:
-        run:
-          working-directory: ./src/services/boulders/boulders.api/
-
-    steps:
-    - uses: actions/checkout@v3
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+      steps:
+      - uses: actions/checkout@v3
+      - name: Build the Docker image
+        run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
