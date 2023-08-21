@@ -1,6 +1,3 @@
-
-using Microsoft.EntityFrameworkCore;
-
 public static class DependencyInjection
 {
     public static IServiceCollection AddApplication(this IServiceCollection services, IConfiguration configuration)
@@ -13,6 +10,7 @@ public static class DependencyInjection
         services.AddTransient<LocationService>();
         services.AddTransient<SessionService>();
         services.AddTransient<GroupingService>();
+        services.AddTransient<UserService>();
         return services;
     }
 }

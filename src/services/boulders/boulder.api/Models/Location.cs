@@ -10,6 +10,7 @@ public class Location : AuditableEntity
     public bool Active { get; private set; }
     public bool IsPrivate { get; set; }
     public List<Grouping> BoulderGroups { get; set; }
+    public List<User> Users { get; set; }
 
     #region Constructors
 
