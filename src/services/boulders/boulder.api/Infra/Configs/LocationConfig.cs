@@ -20,6 +20,11 @@ internal class LocationConfig : IEntityTypeConfiguration<Location>
             .HasMany(c => c.BoulderGroups)
             .WithOne(m => m.GymLocation)
             .OnDelete(DeleteBehavior.Cascade);
+
+        entity
+            .HasMany(c => c.Users)
+            .WithOne(m => m.GymLocation)
+            .OnDelete(DeleteBehavior.Cascade);
         #endregion
     }
 }

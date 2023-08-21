@@ -9,6 +9,7 @@ public class BoulderContext : DbContext
     public DbSet<Grouping> Groupings { get; set; }
     public DbSet<Climb> Climbs { get; set; }
     public DbSet<Session> Sessions { get; set; }
+    public DbSet<User> Users { get; set; }
     
     public BoulderContext()
     {
