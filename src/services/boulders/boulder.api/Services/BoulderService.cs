@@ -14,6 +14,8 @@ public class BoulderService
 
     public async Task<IEnumerable<Boulder>> GetAllBoulders() => await _context.Boulders.ToListAsync();
 
+    public async Task<Boulder> GetBoulderById(Guid id) => await _context.Boulders.FindAsync(id);
+
     public async Task<int> AddBoulder(Boulder boulder) {
         await _context.Boulders.AddAsync(boulder);
         var res = await _context.SaveChangesAsync();

@@ -13,12 +13,5 @@ internal class UserConfig : IEntityTypeConfiguration<User>
         entity.Property(p => p.IsPrivate).IsRequired().HasDefaultValue(false);
 
         #endregion
-
-        #region Relationships
-        // entity
-        //     .HasMany(c => c.BoulderGroups)
-        //     .WithOne(m => m.GymLocation)
-        //     .OnDelete(DeleteBehavior.Cascade);
-        #endregion
     }
 }
