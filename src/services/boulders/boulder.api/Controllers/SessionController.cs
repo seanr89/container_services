@@ -1,6 +1,6 @@
 
 [ApiController]
-[Route("[controller]/[action]")]
+[Route("api/[controller]/[action]")]
 public class SessionController: ControllerBase
 {
     private readonly SessionService _sessionService;

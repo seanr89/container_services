@@ -2,7 +2,7 @@ namespace boulder.api.Controllers;
 using Microsoft.AspNetCore.Mvc;
 
 [ApiController]
-[Route("[controller]/[action]")]
+[Route("api/[controller]/[action]")]
 public class BoulderController : ControllerBase
 {
     private readonly ILogger<BoulderController> _logger;

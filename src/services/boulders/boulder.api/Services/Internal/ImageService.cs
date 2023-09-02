@@ -1,5 +1,5 @@
 
-public class ImageService
+public class ImageService : IImageService
 {
     public ImageService()
     {

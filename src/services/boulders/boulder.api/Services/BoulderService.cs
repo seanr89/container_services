@@ -12,6 +12,9 @@ public class BoulderService
     /// <returns></returns>
     public int GetBoulderCount() => _context.Boulders.Count();
 
+    public async Task<IEnumerable<Boulder>> GetBouldersByDate(DateTime date) =>
+        await _context.Boulders.Where(b => b.ActiveDate >= date && b.DeActiveDate <= date).ToListAsync();
+
     public async Task<IEnumerable<Boulder>> GetAllBoulders() => await _context.Boulders.ToListAsync();
 
     public async Task<Boulder> GetBoulderById(Guid id) => await _context.Boulders.FindAsync(id);

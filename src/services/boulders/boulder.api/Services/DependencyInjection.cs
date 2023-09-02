@@ -11,6 +11,8 @@ public static class DependencyInjection
         services.AddTransient<SessionService>();
         services.AddTransient<GroupingService>();
         services.AddTransient<UserService>();
+
+        services.AddTransient<IImageService, ImageService>();
         return services;
     }
 }

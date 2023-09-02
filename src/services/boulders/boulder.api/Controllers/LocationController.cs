@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 
 [ApiController]
-[Route("[controller]/[action]")]
+[Route("api/[controller]/[action]")]
 public class LocationController : ControllerBase
 {
     private readonly ILogger<LocationController> _logger;

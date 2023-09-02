@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("api/[controller]/[action]")]
 public class GroupingController : ControllerBase
 {
     private readonly GroupingService _service;
@@ -15,6 +15,13 @@ public class GroupingController : ControllerBase
     public async Task<IEnumerable<Grouping>> GetAllGroupings()
     {
         return await _service.GetAllGroupings();
+    }
+
+    [HttpGet("{id}")]
+    public async Task<IEnumerable<Grouping>> GetGroupingsByd(int id)
+    {
+        throw new NotImplementedException();
+        //return await _service.GetGroupingsByLocationId(locationId);
     }
 
     [HttpPost]
