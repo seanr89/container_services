@@ -1,6 +1,4 @@
 
-using Microsoft.EntityFrameworkCore;
-
 public class BoulderContext : DbContext
 {
     public DbSet<Boulder> Boulders { get; set; }

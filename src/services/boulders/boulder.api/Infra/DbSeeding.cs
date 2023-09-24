@@ -27,10 +27,10 @@ public static class DbSeeding
         } 
     }
 
-    static async Task SeedBoulders(BoulderContext context)
+    private static async Task SeedBoulders(BoulderContext context)
     {
         var boulders = new List<Boulder>();
-        for (int i = 1; i <= 10; i++)
+        for (var i = 1; i <= 10; i++)
         {
             boulders.Add(new Boulder(
                 $"Boulder {i}",
@@ -43,10 +43,10 @@ public static class DbSeeding
         await context.SaveChangesAsync();
     }
 
-    static async Task SeedGroupings(BoulderContext context)
+    private static async Task SeedGroupings(BoulderContext context)
     {
         var groupings = new List<Grouping>();
-        for (int i = 1; i <= 10; i++)
+        for (var i = 1; i <= 10; i++)
         {
             groupings.Add(new Grouping
             {
@@ -59,12 +59,14 @@ public static class DbSeeding
         await context.SaveChangesAsync();
     }
 
-    static async Task SeedLocations(BoulderContext context)
+    private static async Task SeedLocations(BoulderContext context)
     {
-        var locations = new List<Location>();
-        locations.Add(new Location("Movement", true, false));
-        locations.Add(new Location("Earth Treks", true, false, "https://www.earthtreksclimbing.com/englewood/"));
-        locations.Add(new Location("The Spot", true, false));
+        var locations = new List<Location>
+        {
+            new("Movement", true, false),
+            new("Earth Treks", true, false, "https://www.earthtreksclimbing.com/englewood/"),
+            new("The Spot", true, false)
+        };
 
         context.Locations.AddRange(locations);
         await context.SaveChangesAsync();

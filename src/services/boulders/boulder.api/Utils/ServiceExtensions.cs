@@ -24,7 +24,8 @@ public static class ServiceExtensions
             if(opt.SeedData)
                 DbSeeding.TryRunSeed(context).Wait();
 
-        }catch(Exception e)
+        }
+        catch(Exception e)
         {
             Console.WriteLine($"RunDB Migrate - Exception caught: {e.Message}");
         }
