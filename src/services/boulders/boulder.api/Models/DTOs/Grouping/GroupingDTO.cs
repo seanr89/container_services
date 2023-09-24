@@ -6,6 +6,7 @@ public class GroupingDTO
     public bool Active { get; set; }
     public string LocationName { get; set; }
     public int LocationId { get; set; }
+    public List<BoulderListDTO> Boulders { get; set; }
 
     public GroupingDTO(Grouping model)
     {
@@ -14,5 +15,6 @@ public class GroupingDTO
         this.Active = model.Active;
         this.LocationName = model.GymLocation.Name;
         this.LocationId = model.GymLocation.Id;
+        this.Boulders = model.Boulders.Select(b => new BoulderListDTO(b)).ToList();
     }
 }
