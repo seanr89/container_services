@@ -18,7 +18,7 @@ public class GroupingController : ControllerBase
     }
 
     [HttpGet("{id}")]
-    public async Task<IEnumerable<Grouping>> GetGroupingsByd(int id)
+    public async Task<IEnumerable<Grouping>> GetGroupingById(int id)
     {
         throw new NotImplementedException();
         //return await _service.GetGroupingsByLocationId(locationId);
@@ -32,16 +32,16 @@ public class GroupingController : ControllerBase
         return CreatedAtAction(nameof(GetGroupingById), new { id = addedGrouping.Id }, addedGrouping);
     }
 
-    [HttpGet("{id}")]
-    public async Task<ActionResult<Grouping>> GetGroupingById(Guid id)
-    {
-        var grouping = await _service.GetGroupingById(id);
+    // [HttpGet("{id}")]
+    // public async Task<ActionResult<Grouping>> GetGroupingById(Guid id)
+    // {
+    //     var grouping = await _service.GetGroupingById(id);
 
-        if (grouping == null)
-        {
-            return NotFound();
-        }
+    //     if (grouping == null)
+    //     {
+    //         return NotFound();
+    //     }
 
-        return grouping;
-    }
+    //     return grouping;
+    // }
 }
