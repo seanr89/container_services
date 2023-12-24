@@ -11,12 +11,12 @@ public static class DbSeeding
     /// <returns></returns>
     public static async Task TryRunSeed(BoulderContext context)
     {
-        if(!context.Locations.Any())
+        if (!context.Locations.Any())
         {
             await SeedLocations(context);
         }
 
-        if(!context.Groupings.Any())
+        if (!context.Groupings.Any())
         {
             await SeedGroupings(context);
         }
@@ -24,9 +24,14 @@ public static class DbSeeding
         if (!context.Boulders.Any())
         {
             await SeedBoulders(context);
-        } 
+        }
     }
 
+    /// <summary>
+    /// Seeds the boulders in the database.
+    /// </summary>
+    /// <param name="context">The <see cref="BoulderContext"/> instance.</param>
+    /// <returns>A task representing the asynchronous operation.</returns>
     private static async Task SeedBoulders(BoulderContext context)
     {
         var boulders = new List<Boulder>();
@@ -43,6 +48,11 @@ public static class DbSeeding
         await context.SaveChangesAsync();
     }
 
+    /// <summary>
+    /// Seeds the groupings in the database.
+    /// </summary>
+    /// <param name="context">The <see cref="BoulderContext"/> instance.</param>
+    /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
     private static async Task SeedGroupings(BoulderContext context)
     {
         var groupings = new List<Grouping>();
@@ -59,6 +69,11 @@ public static class DbSeeding
         await context.SaveChangesAsync();
     }
 
+    /// <summary>
+    /// Seeds the locations in the database.
+    /// </summary>
+    /// <param name="context">The BoulderContext instance.</param>
+    /// <returns>A task representing the asynchronous operation.</returns>
     private static async Task SeedLocations(BoulderContext context)
     {
         var locations = new List<Location>
