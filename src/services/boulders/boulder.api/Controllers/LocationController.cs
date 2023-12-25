@@ -25,6 +25,7 @@ public class LocationController : ControllerBase
     public async Task<IEnumerable<LocationListDTO>> Get()
     {
         var data = await _locationService.GetAllLocations();
+        // Run DTO Conversion!
         if (data.Any())
         {
             var dtos = data.Select(x => new LocationListDTO(x));
@@ -34,7 +35,7 @@ public class LocationController : ControllerBase
     }
 
     /// <summary>
-    /// 
+    /// Get Single Location by Id
     /// </summary>
     /// <param name="id"></param>
     /// <returns></returns>
@@ -53,9 +54,9 @@ public class LocationController : ControllerBase
     }
 
     /// <summary>
-    /// 
+    /// Support creation of a new a location
     /// </summary>
-    /// <param name="location"></param>
+    /// <param name="location">DTO Creation object</param>
     /// <returns></returns>
     [HttpPost]
     public async Task<ActionResult<LocationDTO>> Create(CreateLocationDTO location)
@@ -79,13 +80,11 @@ public class LocationController : ControllerBase
     public async Task<IActionResult> Update(int id, Location location)
     {
         if (id != location.Id)
-        {
-            return BadRequest();
-        }
+            return this.BadRequest();
 
         await _locationService.UpdateLocation(location);
 
-        return NoContent();
+        return this.NoContent();
     }
 
     /// <summary>
@@ -96,15 +95,15 @@ public class LocationController : ControllerBase
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(int id)
     {
-        var location = await this._locationService.GetLocationById(id);
+        var location = await _locationService.GetLocationById(id);
 
         if (location == null)
         {
-            return NotFound();
+            return this.NotFound();
         }
 
-        await this._locationService.DeleteLocation(location);
+        await _locationService.DeleteLocation(location);
 
-        return NoContent();
+        return this.NoContent();
     }
 }
