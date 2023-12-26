@@ -56,13 +56,17 @@ public static class DbSeeding
     private static async Task SeedGroupings(BoulderContext context)
     {
         var groupings = new List<Grouping>();
-        for (var i = 1; i <= 10; i++)
+        var locations = await context.Locations.ToListAsync();
+        foreach(var loc in locations)
         {
-            groupings.Add(new Grouping
+            for (var i = 1; i <= 1; i++)
             {
-                Name = $"Grouping {i}",
-                GymLocation = context.Locations.First()
-            });
+                groupings.Add(new Grouping
+                {
+                    Name = $"Grouping {i}",
+                    GymLocation = loc
+                });
+            }
         }
 
         context.Groupings.AddRange(groupings);
@@ -78,9 +82,12 @@ public static class DbSeeding
     {
         var locations = new List<Location>
         {
+            new("BoulderWorld1", true, false),
+            new("BoulderWorld2", true, false),
             new("Movement", true, false),
             new("Earth Treks", true, false, "https://www.earthtreksclimbing.com/englewood/"),
-            new("The Spot", true, false)
+            new("The Spot", true, false),
+            new("Ubergrippen", true, false),
         };
 
         context.Locations.AddRange(locations);

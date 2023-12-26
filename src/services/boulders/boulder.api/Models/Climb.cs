@@ -1,6 +1,6 @@
 
 /// <summary>
-/// Model for a single climb
+/// Model for a single climb attempted or completed
 /// </summary>
 public class Climb
 {

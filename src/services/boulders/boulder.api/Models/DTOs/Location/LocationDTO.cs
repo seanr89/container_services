@@ -7,6 +7,13 @@ public class LocationDTO
     public bool IsPrivate { get; set; }
     public List<GroupingListDTO> Groupings { get; set; }
 
+
+    #region Constructors
+
+    /// <summary>
+    /// DTO from DB model
+    /// </summary>
+    /// <param name="model"></param>
     public LocationDTO(Location model)
     {
         this.Id = model.Id;
@@ -15,4 +22,6 @@ public class LocationDTO
         this.IsPrivate = model.IsPrivate;
         this.Groupings = model.BoulderGroups.Select(g => new GroupingListDTO(g)).ToList();
     }
+
+    #endregion
 }

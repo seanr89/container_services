@@ -40,6 +40,8 @@ public class LocationController : ControllerBase
     /// <param name="id"></param>
     /// <returns></returns>
     [HttpGet("{id}")]
+    [ProducesResponseType(typeof(LocationDTO), 200)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult<LocationDTO>> GetById(int id)
     {
         var location = await _locationService.GetLocationById(id);
@@ -71,7 +73,7 @@ public class LocationController : ControllerBase
     }
 
     /// <summary>
-    /// 
+    /// Update an individual location
     /// </summary>
     /// <param name="id"></param>
     /// <param name="location"></param>
@@ -88,11 +90,14 @@ public class LocationController : ControllerBase
     }
 
     /// <summary>
-    /// 
+    /// Delete an individual location
     /// </summary>
     /// <param name="id"></param>
     /// <returns></returns>
     [HttpDelete("{id}")]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+
     public async Task<IActionResult> Delete(int id)
     {
         var location = await _locationService.GetLocationById(id);
